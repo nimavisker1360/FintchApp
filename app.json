@@ -18,8 +18,6 @@
     },
     "android": {
       "adaptiveIcon": {
-        "hardwareAccelerated": true,
-        "permissions": [],
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
@@ -30,11 +28,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-asset",
-      "expo-video"
-    ],
+    "plugins": ["expo-router", "expo-asset", "expo-video"],
     "experiments": {
       "typedRoutes": true
     }
