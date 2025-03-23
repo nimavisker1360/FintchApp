@@ -39,11 +39,19 @@ const Page = () => {
         const { supportedFirstFactors } = await signIn!.create({
           identifier: fullPhoneNumber,
         });
-        const firstPhoneFactor: any = supportedFirstFactors.find(
-          (factor: any) => {
-            return factor.strategy === "phone_code";
-          }
+
+        if (!supportedFirstFactors) {
+          throw new Error("No supported factors found");
+        }
+
+        const firstPhoneFactor = supportedFirstFactors.find(
+          (factor) => factor.strategy === "phone_code"
         );
+
+        if (!firstPhoneFactor) {
+          throw new Error("Phone factor not supported");
+        }
+
         const { phoneNumberId } = firstPhoneFactor;
 
         await signIn!.prepareFirstFactor({
