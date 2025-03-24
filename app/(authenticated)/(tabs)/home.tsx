@@ -1,11 +1,10 @@
+import Dropdown from "@/components/Dropdown";
 import RoundBtn from "@/components/RoundBtn";
 import Colors from "@/constants/Colors";
 import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
 
 const PAGE = () => {
-  const onAddMoney = () => {
-   
-  };
+  const onAddMoney = () => {};
   const balance = 1420;
   return (
     <ScrollView style={{ backgroundColor: Colors.background }}>
@@ -16,10 +15,10 @@ const PAGE = () => {
         </View>
       </View>
       <View style={styles.actionRow}>
-        <RoundBtn icon={'add'} text={'Add Money'} onPress={onAddMoney}  />
-        <RoundBtn icon={'refresh'} text={'Exchange'}   />
-        <RoundBtn icon={'list'} text={'Details'}  />
-        <RoundBtn icon={'add'} text={'Add Money'} onPress={onAddMoney}  />
+        <RoundBtn icon={"add"} text={"Add Money"} onPress={onAddMoney} />
+        <RoundBtn icon={"refresh"} text={"Exchange"} />
+        <RoundBtn icon={"list"} text={"Details"} />
+        <Dropdown label={""} />
       </View>
     </ScrollView>
   );
@@ -37,15 +36,15 @@ const styles = StyleSheet.create({
   },
   balance: {
     fontSize: 50,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   currency: {
     fontSize: 20,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   actionRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 20,
   },
 });
