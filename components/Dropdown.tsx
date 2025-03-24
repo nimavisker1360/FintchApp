@@ -24,6 +24,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label }) => {
     top: 0,
     right: 0,
   });
+  const [buttonHeight, setButtonHeight] = useState(0);
 
   const menuItems = [
     { text: "Statement", icon: "file-document-outline" },
@@ -43,8 +44,9 @@ const Dropdown: React.FC<DropdownProps> = ({ label }) => {
         pageY: number
       ) => {
         const screenWidth = Dimensions.get("window").width;
+        setButtonHeight(height);
         setDropdownPosition({
-          top: pageY + height + 1,
+          top: pageY,
           right: screenWidth - (pageX + width + 1),
         });
         setIsOpen(true);
@@ -61,9 +63,15 @@ const Dropdown: React.FC<DropdownProps> = ({ label }) => {
   const handleClose = () => {
     Animated.timing(scaleAnim, {
       toValue: 0,
-      duration: 150,
+      duration: 200,
       useNativeDriver: true,
-    }).start(() => setIsOpen(false));
+    }).start(() => {
+      setIsOpen(false);
+      setDropdownPosition({
+        top: 0,
+        right: 0,
+      });
+    });
   };
 
   return (
@@ -95,7 +103,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label }) => {
                   {
                     translateY: scaleAnim.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [-10, 0],
+                      outputRange: [0, buttonHeight + 1],
                     }),
                   },
                 ],
