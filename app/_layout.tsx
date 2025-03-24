@@ -9,8 +9,9 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { TouchableOpacity, Text, View, ActivityIndicator } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 import * as SecureStore from "expo-secure-store";
+
+const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const tokenCache = {
   async getToken(key: string) {
@@ -37,6 +38,8 @@ export {
 SplashScreen.preventAutoHideAsync();
 
 const InitialLayout = () => {
+  console.log("Clerk Publishable Key:", CLERK_PUBLISHABLE_KEY);
+
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
@@ -140,7 +143,7 @@ const InitialLayout = () => {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name="(authenticated)/(tabs)"
         options={{ headerShown: false }}
       />
@@ -149,10 +152,15 @@ const InitialLayout = () => {
 };
 
 const RootLayoutNav = () => {
+  const router = useRouter();
+
   return (
     <ClerkProvider
       publishableKey={CLERK_PUBLISHABLE_KEY!}
       tokenCache={tokenCache}
+      routerPush={router.push as any}
+      routerReplace={router.replace as any}
+      isSatellite={false}
     >
       <GestureHandlerRootView style={{ flex: 1 }}>
         <StatusBar style="light" />
