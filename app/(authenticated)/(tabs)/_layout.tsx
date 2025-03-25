@@ -38,7 +38,7 @@ const Layout = () => {
             <FontAwesome name="home" color={color} size={size} />
           ),
           header: () => <CustomHeader />,
-          headerTransparent: true,
+          headerTransparent: false,
         }}
       />
       <Tabs.Screen

@@ -6,8 +6,11 @@ import { defaultStyles } from "@/constants/Styles";
 import { useBalanceStore } from "@/store/balanceStore";
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
+import { useHeaderHeight } from "@react-navigation/elements";
+
 
 const PAGE = () => {
+  const headerHeight = useHeaderHeight();
   const { balance, runTransaction, transactions, clearTransactions } =
     useBalanceStore();
 
@@ -21,7 +24,11 @@ const PAGE = () => {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: Colors.background }}>
+    <ScrollView
+      style={{ backgroundColor: Colors.background }}
+      contentContainerStyle={{ paddingTop: headerHeight }}
+     
+    >
       <View style={styles.account}>
         <View style={styles.row}>
           <Text style={styles.balance}>{balance()}</Text>
@@ -76,7 +83,7 @@ const PAGE = () => {
 const styles = StyleSheet.create({
   account: {
     alignItems: "center",
-    margin: 80,
+    margin: 20,
   },
   row: {
     flexDirection: "row",
