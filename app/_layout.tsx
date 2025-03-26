@@ -12,6 +12,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as SecureStore from "expo-secure-store";
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { UserInactivityProvider } from "@/context/UserInactivity";
 
 const queryClient = new QueryClient();
 
@@ -154,10 +155,12 @@ const InitialLayout = () => {
         options={{
           title: "",
           headerLeft: () => (
-            <TouchableOpacity style={{ alignItems: 'center', marginLeft: 8 }} onPress={router.back}>
+            <TouchableOpacity
+              style={{ alignItems: "center", marginLeft: 8 }}
+              onPress={router.back}
+            >
               <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
-           
           ),
           headerLargeTitle: true,
           headerTransparent: true,
@@ -177,6 +180,10 @@ const InitialLayout = () => {
           ),
         }}
       />
+      <Stack.Screen
+        name="(authenticated)/(modals)/lock"
+        options={{ headerShown: false, animation: "none" }}
+      />
     </Stack>
   );
 };
@@ -190,10 +197,12 @@ const RootLayoutNav = () => {
       tokenCache={tokenCache}
     >
       <QueryClientProvider client={queryClient}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <StatusBar style="light" />
-          <InitialLayout />
-        </GestureHandlerRootView>
+        <UserInactivityProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <StatusBar style="light" />
+            <InitialLayout />
+          </GestureHandlerRootView>
+        </UserInactivityProvider>
       </QueryClientProvider>
     </ClerkProvider>
   );
