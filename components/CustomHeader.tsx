@@ -10,7 +10,7 @@ const CustomHeader = () => {
   const { top } = useSafeAreaInsets();
 
   return (
-    <BlurView intensity={100} tint={'dark'} style={{ paddingTop: top + 10 }}>
+    <BlurView intensity={100} tint={'light'} style={{ paddingTop: top + 10 }}>
       <View
         style={[
           styles.container,
